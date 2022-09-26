@@ -17,10 +17,20 @@ public class BatteryRepo  {
     public Collection<BatteryEntity> getAll() {
         return batteryDatabase.values();
     }
+    public BatteryEntity getById(int id) {
+        return  batteryDatabase.get(id);
+    }
 
-    public boolean containsValue(Object value) {
-        batteryDatabase.containsValue(value);
+    public boolean containsValue(BatteryEntity batteryEntity) {
+        batteryDatabase.containsValue(batteryEntity);
         return false;
+    }
+    public boolean contains(int id) {
+        return batteryDatabase.containsKey(id);
+
+    }
+    public int itemCount() {
+        return batteryDatabase.keySet().size();
     }
 
 }

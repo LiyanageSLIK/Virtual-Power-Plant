@@ -1,17 +1,14 @@
-package com.virtual_power_plant_system.virtual.power.plant.system.entity;
-import javax.persistence.*;
-import static javax.persistence.GenerationType.SEQUENCE;
+package com.virtual_power_plant_system.virtual.power.plant.system.dto;
 
-@Entity
-public class BatteryEntity {
 
-    @Id
-    @GeneratedValue(strategy=SEQUENCE, generator="CUST_SEQ")
+public class BatteryRequestDto {
     private int id;
-    @Column(name = "Name")
     private String name;
     private int postcode;
     private float wattCapacity;
+
+    public BatteryRequestDto() {
+    }
 
     public int getId() {
         return id;
