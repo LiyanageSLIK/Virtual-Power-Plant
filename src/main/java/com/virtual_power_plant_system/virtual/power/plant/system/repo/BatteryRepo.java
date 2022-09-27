@@ -8,7 +8,7 @@ import java.util.*;
 @Repository
 public class BatteryRepo  {
 
-    BatteryDto batteryDto =new BatteryDto();
+    BatteryDto batteryDto ;
 
     private final Map<Integer, BatteryEntity> batteryDatabase;
     public BatteryRepo() {
@@ -22,6 +22,7 @@ public class BatteryRepo  {
         return batteryDatabase.values();
     }
     public BatteryDto getById(int id) {
+        batteryDto=new BatteryDto();
         this.batteryDto.setId(batteryDatabase.get(id).getId());
         this.batteryDto.setName(batteryDatabase.get(id).getName());
         this.batteryDto.setPostcode(batteryDatabase.get(id).getPostcode());
