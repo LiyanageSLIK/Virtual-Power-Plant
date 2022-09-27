@@ -28,9 +28,9 @@ private BatteryEntity batteryEntity;
     public BatteryDto addBattery(BatteryDto batteryDto) throws Exception {
         if (!batteryDto.getName().isEmpty() && batteryDto.getId()>0 && batteryDto.getPostcode()>0
                 && batteryDto.getWattCapacity()>0) {
-
             if (!batteryRepo.contains(batteryDto.getId())) {
-                batteryEntity=new BatteryEntity(batteryDto);
+                batteryEntity=new BatteryEntity();
+                batteryEntity.SetByDto(batteryDto);
                 batteryEntity.setId(batteryRepo.itemCount()+1);
                 batteryRepo.put(batteryEntity);
                 return (batteryRepo.getById(batteryEntity.getId()));

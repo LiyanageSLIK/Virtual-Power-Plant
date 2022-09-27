@@ -1,9 +1,7 @@
 package com.virtual_power_plant_system.virtual.power.plant.system.dto;
 
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
-import org.springframework.stereotype.Component;
 
-@Component
 public class BatteryDto {
     private int id;
     private String name;

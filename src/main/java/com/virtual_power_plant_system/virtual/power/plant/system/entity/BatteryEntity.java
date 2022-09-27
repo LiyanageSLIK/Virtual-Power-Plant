@@ -1,5 +1,6 @@
 package com.virtual_power_plant_system.virtual.power.plant.system.entity;
 import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryDto;
+
 import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -17,7 +18,7 @@ public class BatteryEntity {
     public BatteryEntity() {
     }
 
-    public BatteryEntity(BatteryDto batteryDto) {
+    public void SetByDto(BatteryDto batteryDto) {
         this.id= batteryDto.getId();
         this.name= batteryDto.getName();
         this.postcode= batteryDto.getPostcode();

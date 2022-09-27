@@ -15,7 +15,6 @@ public class BatteryRepo  {
         this.batteryDatabase = new HashMap<>();
     }
     public void put(BatteryEntity batteryEntity) {
-
         batteryDatabase.put(batteryEntity.getId(), batteryEntity);
     }
     public Collection<BatteryEntity> getAll() {
