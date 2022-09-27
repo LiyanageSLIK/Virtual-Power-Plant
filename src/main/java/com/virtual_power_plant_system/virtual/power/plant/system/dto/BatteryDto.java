@@ -1,14 +1,25 @@
 package com.virtual_power_plant_system.virtual.power.plant.system.dto;
 
+import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
+import org.springframework.stereotype.Component;
 
-public class BatteryRequestDto {
+@Component
+public class BatteryDto {
     private int id;
     private String name;
     private int postcode;
     private float wattCapacity;
 
-    public BatteryRequestDto() {
+    public BatteryDto() {
     }
+
+    public BatteryDto(BatteryEntity batteryEntity) {
+        this.id=batteryEntity.getId();
+        this.name=batteryEntity.getName();
+        this.postcode=batteryEntity.getPostcode();
+        this.wattCapacity=batteryEntity.getWattCapacity();
+    }
+
 
     public int getId() {
         return id;

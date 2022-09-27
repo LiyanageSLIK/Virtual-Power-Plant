@@ -1,7 +1,7 @@
 package com.virtual_power_plant_system.virtual.power.plant.system.service;
 
-import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryRequestDto;
-import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryResponseDto;
+import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryDto;
+import com.virtual_power_plant_system.virtual.power.plant.system.dto.ResponseWrapper;
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
 import com.virtual_power_plant_system.virtual.power.plant.system.repo.BatteryRepo;
 import org.springframework.stereotype.Service;
@@ -12,31 +12,30 @@ import java.util.*;
 public class BatteryService {
 private final BatteryRepo batteryRepo=new BatteryRepo();
 
-private BatteryResponseDto batteryResponseDto;
+private ResponseWrapper responseWrapper;
 
 private BatteryEntity batteryEntity;
 
-
-
-
-    public List<BatteryEntity> getAllBatteries() {
-        return new ArrayList<>(batteryRepo.getAll());
+    public List<BatteryDto> getAllBatteries() {
+        ArrayList<BatteryDto> batteryDtoList = new ArrayList<>();
+        for (BatteryEntity batteryEntity1:batteryRepo.getAll()
+             ) {
+            batteryDtoList.add(new BatteryDto(batteryEntity1));
+        }
+        return batteryDtoList;
     }
 
-    public BatteryEntity addBattery( BatteryRequestDto batteryRequestDto) throws Exception {
-        if (!batteryRequestDto.getName().isEmpty() && batteryRequestDto.getId()>0 && batteryRequestDto.getPostcode()>0
-                && batteryRequestDto.getWattCapacity()>0) {
-            batteryEntity=new BatteryEntity();
-            if (!batteryRepo.contains(batteryRequestDto.getId())) {
+    public BatteryDto addBattery(BatteryDto batteryDto) throws Exception {
+        if (!batteryDto.getName().isEmpty() && batteryDto.getId()>0 && batteryDto.getPostcode()>0
+                && batteryDto.getWattCapacity()>0) {
+
+            if (!batteryRepo.contains(batteryDto.getId())) {
+                batteryEntity=new BatteryEntity(batteryDto);
                 batteryEntity.setId(batteryRepo.itemCount()+1);
-                batteryEntity.setName(batteryRequestDto.getName());
-                batteryEntity.setPostcode(batteryRequestDto.getPostcode());
-                batteryEntity.setWattCapacity(batteryRequestDto.getWattCapacity());
                 batteryRepo.put(batteryEntity);
-                batteryResponseDto=new BatteryResponseDto(200,batteryRepo.getById(batteryEntity.getId()));
                 return (batteryRepo.getById(batteryEntity.getId()));
             } else {
-                throw new Exception("Battery already exists for ID:" + batteryRequestDto.getId());
+                throw new Exception("Battery already exists for ID:" + batteryDto.getId());
             }
         } else {
             throw new Exception("Missing some properties for given battery");

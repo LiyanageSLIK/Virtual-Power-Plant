@@ -1,7 +1,7 @@
 package com.virtual_power_plant_system.virtual.power.plant.system.controllers;
 
-import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryRequestDto;
-import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryResponseDto;
+import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryDto;
+import com.virtual_power_plant_system.virtual.power.plant.system.dto.ResponseWrapper;
 import com.virtual_power_plant_system.virtual.power.plant.system.service.BatteryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,22 +13,20 @@ public class BatteryControllers {
     @Autowired
     private BatteryService batteryService;
     @PostMapping("")
-    public BatteryResponseDto addBattery(@RequestBody BatteryRequestDto batteryRequestDto){
+    public ResponseWrapper addBattery(@RequestBody BatteryDto batteryDto){
         try {
-            return new BatteryResponseDto(200,batteryService.addBattery(batteryRequestDto));
+            return new ResponseWrapper(200,batteryService.addBattery(batteryDto));
         } catch (Exception e) {
-            return new BatteryResponseDto(400, e.getMessage());
+            return new ResponseWrapper(400, e.getMessage());
         }
-
     }
 
     @GetMapping ("")
-    public BatteryResponseDto getBattery(){
-
+    public ResponseWrapper getBattery(){
         try {
-            return new BatteryResponseDto(200,batteryService.getAllBatteries());
+            return new ResponseWrapper(200,batteryService.getAllBatteries());
         } catch (Exception e) {
-            return new BatteryResponseDto(400, "Empty List");
+            return new ResponseWrapper(400, "Empty List");
         }
     }
 
