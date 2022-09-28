@@ -1,6 +1,5 @@
 package com.virtual_power_plant_system.virtual.power.plant.system.repo;
 
-import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryDto;
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -8,38 +7,47 @@ import java.util.*;
 @Repository
 public class BatteryRepo  {
 
-    BatteryDto batteryDto ;
-
     private final Map<Integer, BatteryEntity> batteryDatabase;
+
     public BatteryRepo() {
         this.batteryDatabase = new HashMap<>();
     }
-    public void put(BatteryEntity batteryEntity) {
-        batteryDatabase.put(batteryEntity.getId(), batteryEntity);
-    }
-    public Collection<BatteryEntity> getAll() {
 
+    public Collection<BatteryEntity> getAll() {
         return batteryDatabase.values();
     }
-    public BatteryDto getById(int id) {
-        batteryDto=new BatteryDto();
-        this.batteryDto.setId(batteryDatabase.get(id).getId());
-        this.batteryDto.setName(batteryDatabase.get(id).getName());
-        this.batteryDto.setPostcode(batteryDatabase.get(id).getPostcode());
-        this.batteryDto.setWattCapacity(batteryDatabase.get(id).getWattCapacity());
-        return batteryDto;
+
+    public BatteryEntity getById(int id) {
+        return batteryDatabase.get(id);
     }
 
-    public boolean containsValue(BatteryEntity batteryEntity) {
-        return batteryDatabase.containsValue(batteryEntity);
+    public void add(BatteryEntity batteryEntity) {
+        batteryDatabase.put(batteryEntity.getId(), batteryEntity);
     }
+
+    public void update(BatteryEntity batteryEntity) {
+        batteryDatabase.replace(batteryEntity.getId(), batteryEntity);
+    }
+
+    public BatteryEntity delete(int id) {
+        return batteryDatabase.remove(id);
+    }
+
     public boolean contains(int id) {
         return batteryDatabase.containsKey(id);
 
     }
-    public int itemCount() {
 
+    public int itemCount() {
         return batteryDatabase.keySet().size();
+    }
+
+    public int lastKey() {
+        if(batteryDatabase.isEmpty()){return 0;}
+        else {
+            Object lastKey = batteryDatabase.keySet().toArray()[batteryDatabase.size()-1];
+            return batteryDatabase.get(lastKey).getId();
+        }
     }
 
 }
