@@ -3,6 +3,7 @@ package com.virtual_power_plant_system.virtual.power.plant.system.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 public class ResponseWrapper {
     private String message;
     private String error;
@@ -10,17 +11,19 @@ public class ResponseWrapper {
     private int status;
 
     public ResponseWrapper(int status, Collection<BatteryDto> data) {
-        this.data=data;
+        this.data = data;
         this.status = status;
         this.message = "Successful";
     }
+
     public ResponseWrapper(int status, BatteryDto batteryDto) {
-        this.data=new ArrayList<>();
+        this.data = new ArrayList<>();
         data.add(batteryDto);
         this.status = status;
         this.message = "Successful";
 
     }
+
     public ResponseWrapper(int status, String message) {
         this.status = status;
         this.message = message;

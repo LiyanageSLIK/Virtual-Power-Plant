@@ -12,10 +12,10 @@ public class BatteryDto {
     }
 
     public BatteryDto(BatteryEntity batteryEntity) {
-        this.id=batteryEntity.getId();
-        this.name=batteryEntity.getName();
-        this.postcode=batteryEntity.getPostcode();
-        this.wattCapacity=batteryEntity.getWattCapacity();
+        this.id = batteryEntity.getId();
+        this.name = batteryEntity.getName();
+        this.postcode = batteryEntity.getPostcode();
+        this.wattCapacity = batteryEntity.getWattCapacity();
     }
 
 

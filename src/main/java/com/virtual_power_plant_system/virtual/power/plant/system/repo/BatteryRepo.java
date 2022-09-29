@@ -2,10 +2,13 @@ package com.virtual_power_plant_system.virtual.power.plant.system.repo;
 
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
 import org.springframework.stereotype.Repository;
-import java.util.*;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
-public class BatteryRepo  {
+public class BatteryRepo {
 
     private final Map<Integer, BatteryEntity> batteryDatabase;
 
@@ -43,9 +46,10 @@ public class BatteryRepo  {
     }
 
     public int lastKey() {
-        if(batteryDatabase.isEmpty()){return 0;}
-        else {
-            Object lastKey = batteryDatabase.keySet().toArray()[batteryDatabase.size()-1];
+        if (batteryDatabase.isEmpty()) {
+            return 0;
+        } else {
+            Object lastKey = batteryDatabase.keySet().toArray()[batteryDatabase.size() - 1];
             return batteryDatabase.get(lastKey).getId();
         }
     }

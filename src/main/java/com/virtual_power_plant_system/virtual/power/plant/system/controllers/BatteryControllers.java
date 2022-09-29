@@ -12,46 +12,47 @@ import org.springframework.web.bind.annotation.*;
 public class BatteryControllers {
     @Autowired
     private BatteryService batteryService;
-    @GetMapping ("")
-    public ResponseWrapper getBattery(){
+
+    @GetMapping("")
+    public ResponseWrapper getBattery() {
         try {
-            return new ResponseWrapper(200,batteryService.getAllBatteries());
+            return new ResponseWrapper(200, batteryService.getAllBatteries());
         } catch (Exception e) {
             return new ResponseWrapper(400, "Empty List");
         }
     }
 
-    @GetMapping ("/{id}")
-    public ResponseWrapper getByID(@PathVariable(value = "id") int id){
+    @GetMapping("/{id}")
+    public ResponseWrapper getByID(@PathVariable(value = "id") int id) {
         try {
-            return new ResponseWrapper(200,batteryService.getById(id));
+            return new ResponseWrapper(200, batteryService.getById(id));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }
     }
 
     @PostMapping("")
-    public ResponseWrapper addBattery(@RequestBody BatteryDto batteryDto){
+    public ResponseWrapper addBattery(@RequestBody BatteryDto batteryDto) {
         try {
-            return new ResponseWrapper(200,batteryService.addBattery(batteryDto));
+            return new ResponseWrapper(200, batteryService.addBattery(batteryDto));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }
     }
 
-    @PutMapping ("/{id}")
-    public ResponseWrapper updateBattery(@RequestBody BatteryDto batteryDto,@PathVariable(value = "id") int id){
+    @PutMapping("/{id}")
+    public ResponseWrapper updateBattery(@RequestBody BatteryDto batteryDto, @PathVariable(value = "id") int id) {
         try {
-            return new ResponseWrapper(200,batteryService.updateBattery(batteryDto,id));
+            return new ResponseWrapper(200, batteryService.updateBattery(batteryDto, id));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }
     }
 
-    @DeleteMapping ("/{id}")
-    public ResponseWrapper deleteBattery(@PathVariable(value = "id") int id){
+    @DeleteMapping("/{id}")
+    public ResponseWrapper deleteBattery(@PathVariable(value = "id") int id) {
         try {
-            return new ResponseWrapper(200,batteryService.deleteBattery(id));
+            return new ResponseWrapper(200, batteryService.deleteBattery(id));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }
