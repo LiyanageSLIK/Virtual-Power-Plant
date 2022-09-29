@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class BatteryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Name")
     private String name;

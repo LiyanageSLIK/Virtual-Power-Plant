@@ -19,10 +19,9 @@ public class BatteryService {
     @Autowired
     private  BatteryRepo1 batteryRepo1;
 
-    private ResponseWrapper responseWrapper;
 
 
-    private BatteryEntity batteryEntity;
+
 
 
 //    public List<BatteryDto> getAllBatteries() {
@@ -45,8 +44,8 @@ public class BatteryService {
     public BatteryDto addBattery(BatteryDto batteryDto) throws Exception {
         if (!batteryDto.getName().isEmpty()  && batteryDto.getPostcode() > 0
                 && batteryDto.getWattCapacity() > 0) {
-
-            if (!batteryRepo1.existsById(batteryEntity.getId())){
+           BatteryEntity  batteryEntity = new BatteryEntity();
+            if (true){
 
                 batteryEntity = new BatteryEntity();
                 batteryEntity.SetByDto(batteryDto);
