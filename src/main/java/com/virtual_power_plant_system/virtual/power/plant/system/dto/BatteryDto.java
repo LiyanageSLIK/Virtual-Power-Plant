@@ -2,6 +2,8 @@ package com.virtual_power_plant_system.virtual.power.plant.system.dto;
 
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
 
+import java.util.Optional;
+
 public class BatteryDto {
     private int id;
     private String name;

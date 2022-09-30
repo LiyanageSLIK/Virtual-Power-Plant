@@ -13,18 +13,22 @@ public class BatteryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "Name")
+
     private String name;
-    @Column(name = "PostCode")
+
     private int postcode;
-    @Column(name = "WattCapacity")
+
     private float wattCapacity;
+
+    public BatteryEntity(BatteryDto batteryDto) {
+        this.name = batteryDto.getName();
+        this.postcode = batteryDto.getPostcode();
+        this.wattCapacity = batteryDto.getWattCapacity();
+    }
 
     public BatteryEntity() {
     }
-
     public void SetByDto(BatteryDto batteryDto) {
-//        this.id = batteryDto.getId();
         this.name = batteryDto.getName();
         this.postcode = batteryDto.getPostcode();
         this.wattCapacity = batteryDto.getWattCapacity();
