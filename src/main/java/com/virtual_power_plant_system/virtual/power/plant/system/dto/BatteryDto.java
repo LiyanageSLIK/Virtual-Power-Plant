@@ -2,16 +2,16 @@ package com.virtual_power_plant_system.virtual.power.plant.system.dto;
 
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
 
-import java.util.Optional;
-
 public class BatteryDto {
-    private int id;
-    private String name;
-    private int postcode;
-    private float wattCapacity;
+    private int id=0;
+    private String name="";
+    private int postcode=0;
+    private float wattCapacity=0;
 
     public BatteryDto() {
     }
+
+
 
     public BatteryDto(BatteryEntity batteryEntity) {
         this.id = batteryEntity.getId();
@@ -20,6 +20,15 @@ public class BatteryDto {
         this.wattCapacity = batteryEntity.getWattCapacity();
     }
 
+
+
+    public boolean isValidDto(int id){
+        if (this.name.isEmpty() || this.id <= 0 || this.postcode <= 0
+                || this.wattCapacity <= 0 || this.id!=id) {
+            return false;
+        }
+        return true;
+    }
 
     public int getId() {
         return id;

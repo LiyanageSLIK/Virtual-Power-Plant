@@ -17,9 +17,9 @@ public class BatteryControllers {
     @GetMapping("")
     public ResponseWrapper getBattery() {
         try {
-            return new ResponseWrapper(200, batteryService.getAllBatteries());
+            return new ResponseWrapper(200, batteryService.getAll());
         } catch (Exception e) {
-            return new ResponseWrapper(400, "Empty List");
+            return new ResponseWrapper(400, "No Records in Database");
         }
     }
 
@@ -35,7 +35,7 @@ public class BatteryControllers {
     @PostMapping("")
     public ResponseWrapper addBattery(@RequestBody BatteryDto batteryDto) {
         try {
-            return new ResponseWrapper(200, batteryService.addBattery(batteryDto));
+            return new ResponseWrapper(200, batteryService.add(batteryDto));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }
@@ -44,7 +44,7 @@ public class BatteryControllers {
     @PutMapping("/{id}")
     public ResponseWrapper updateBattery(@RequestBody BatteryDto batteryDto, @PathVariable(value = "id") int id) {
         try {
-            return new ResponseWrapper(200, batteryService.updateBattery(batteryDto, id));
+            return new ResponseWrapper(200, batteryService.update(batteryDto, id));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }
@@ -53,7 +53,7 @@ public class BatteryControllers {
     @DeleteMapping("/{id}")
     public ResponseWrapper deleteBattery(@PathVariable(value = "id") int id) {
         try {
-            return new ResponseWrapper(200, batteryService.deleteBattery(id));
+            return new ResponseWrapper(200, batteryService.delete(id));
         } catch (Exception e) {
             return new ResponseWrapper(400, e.getMessage());
         }

@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BatteryRepo extends JpaRepository<BatteryEntity,Integer> {
 
+    default BatteryEntity getById(int id){
+        return this.findById(id).get();
+    }
+
 }

@@ -2,7 +2,6 @@ package com.virtual_power_plant_system.virtual.power.plant.system.service;
 
 import com.virtual_power_plant_system.virtual.power.plant.system.dto.BatteryDto;
 import com.virtual_power_plant_system.virtual.power.plant.system.entity.BatteryEntity;
-//import com.virtual_power_plant_system.virtual.power.plant.system.repo.BatteryRepo;
 import com.virtual_power_plant_system.virtual.power.plant.system.repo.BatteryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,55 +16,52 @@ public class BatteryService {
     private BatteryRepo batteryRepo;
 
 
-    public List<BatteryDto> getAllBatteries() {
+    public List<BatteryDto> getAll() {
         ArrayList<BatteryDto> batteryDtoList = new ArrayList<>();
         for (BatteryEntity batteryEntity1 : batteryRepo.findAll()) {
-            batteryDtoList.add(new BatteryDto(batteryEntity1));
+            BatteryDto batteryDto=new BatteryDto(batteryEntity1);
+            batteryDtoList.add(batteryDto);
         }
         return batteryDtoList;
     }
 
     public BatteryDto getById(int id) throws Exception {
         if (batteryRepo.existsById(id)) {
-            return new BatteryDto(batteryRepo.findById(id).get());
+            return new BatteryDto(batteryRepo.getById(id));
         } else {
             throw new Exception("Battery not exists for ID:" + id);
         }
     }
 
-    public BatteryDto addBattery(BatteryDto batteryDto) throws Exception {
-        if (!batteryDto.getName().isEmpty()  && batteryDto.getPostcode() > 0
-                && batteryDto.getWattCapacity() > 0) {
-                return new BatteryDto(batteryRepo.save(new BatteryEntity(batteryDto)));
+    public BatteryDto add(BatteryDto batteryDto) throws Exception {
+        if (!batteryDto.isValidDto(0)) {
+            BatteryEntity batteryEntity=new BatteryEntity(batteryDto);
+            return new BatteryDto(batteryRepo.save(batteryEntity));
         } else {
             throw new Exception("Missing some properties for given battery");
         }
     }
 
-    public BatteryDto updateBattery(BatteryDto batteryDto, int id) throws Exception {
-        if (!batteryDto.getName().isEmpty() && batteryDto.getId() > 0 && batteryDto.getPostcode() > 0
-                && batteryDto.getWattCapacity() > 0) {
-            if (batteryRepo.existsById(id)) {
-                BatteryEntity batteryEntity=(batteryRepo.findById(id).get());
-                batteryEntity.SetByDto(batteryDto);
-                return new BatteryDto(batteryRepo.save(batteryEntity));
-            } else {
-                throw new Exception("Battery not exists for ID:" + id);
-            }
-        } else {
+    public BatteryDto update(BatteryDto batteryDto, int id) throws Exception {
+        if (!batteryDto.isValidDto(id)) {
             throw new Exception("Missing some properties for given battery");
         }
+        if (!batteryRepo.existsById(id)) {
+            throw new Exception("Battery not exists for ID:" + id);
+        }
+        BatteryEntity batteryEntity = (batteryRepo.getById(id));
+        batteryEntity.SetByDto(batteryDto);
+        return new BatteryDto(batteryRepo.save(batteryEntity));
     }
 
-    public BatteryDto deleteBattery(int id) throws Exception {
+    public BatteryDto delete(int id) throws Exception {
         if (batteryRepo.existsById(id)) {
-            BatteryEntity batteryEntity=(batteryRepo.findById(id).get());
+            BatteryEntity batteryEntity=(batteryRepo.getById(id));
             batteryRepo.deleteById(id);
             return new BatteryDto(batteryEntity);
         } else {
             throw new Exception("Battery not exists for ID:" + id);
         }
     }
-
 
 }
