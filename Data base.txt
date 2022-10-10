@@ -1,0 +1,61 @@
+
+mysql -u root -p<to start sql server>
+
+SHOW DATABASES;<to vishualize databases>
+SHOW SCHEMAS;<to vishualize databases>
+DROP DATABASE Battery_Shop;<to delete database>
+
+CREATE DATABASE Battery_Shop;<to create database>
+
+USE Battery_Shop;<to select relavant daabase>
+
+
+
+CREATE TABLE Shop(
+id INTEGER,
+name VARCHAR(100),
+owner VARCHAR(100) NOT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE Battery(
+id INTEGER,
+shop_id INTEGER,
+name VARCHAR(100),
+capacity DECIMAL(5,2) NOT NULL,
+price DECIMAL(5,2) NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY (shop_id) REFERENCES Shop (id)
+);
+
+CREATE TABLE Invoice(
+id INTEGER,
+customer_name VARCHAR(100) NOT NULL,
+customer_nic VARCHAR(10) NOT NULL,
+total DECIMAL(10,2) NOT NULL,
+created_date DATETIME NOT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE battery_invoice(
+invoice_id INTEGER,
+battery_id INTEGER,
+PRIMARY KEY (invoice_id,battery_id),
+FOREIGN KEY (invoice_id) REFERENCES Invoice (id),
+FOREIGN KEY (battery_id) REFERENCES Battery (id)
+);
+
+SHOW CREATE TABLE battery;
+SHOW FULL TABLES;
+DESC shop;
+DESC battery;
+DESC invoice;
+
+
+ALTER TABLE Battery ALTER COLUMN id AUTO_INCREMENT;
+ALTER TABLE shop MODIFY id INTEGER AUTO_INCREMENT;
+ALTER TABLE battery MODIFY id INTEGER AUTO_INCREMENT;
+ALTER TABLE invoice MODIFY id INTEGER AUTO_INCREMENT;
+ALTER TABLE invoice ADD FOREIGN KEY (shop_id) REFERENCES shop (id);
+INSERT INTO shop(name,owner) VALUES("KumaElectricals","Kumara siriwardana");
+

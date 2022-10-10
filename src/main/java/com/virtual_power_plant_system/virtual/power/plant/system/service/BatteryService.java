@@ -18,7 +18,8 @@ public class BatteryService {
 
     public List<BatteryDto> getAll() {
         ArrayList<BatteryDto> batteryDtoList = new ArrayList<>();
-        for (BatteryEntity batteryEntity1 : batteryRepo.findAll()) {
+        List<BatteryEntity> batteryEntityList =batteryRepo.findAll();
+        for (BatteryEntity batteryEntity1 : batteryEntityList) {
             BatteryDto batteryDto=new BatteryDto(batteryEntity1);
             batteryDtoList.add(batteryDto);
         }
